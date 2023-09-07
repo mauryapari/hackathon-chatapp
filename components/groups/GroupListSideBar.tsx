@@ -46,7 +46,7 @@ const Component: FC<ComponentProps> = async ({ user }) => {
                                     key={group._id}
                                     className={`flex items-center mb-2 cursor-pointer p-2 rounded transition-colors ${hoverCss}`}
                                 >
-                                    <div className="w-8 h-8 rounded-full bg-red-500 mr-2"></div>
+                                    <div className="w-8 h-8 rounded-full bg-red mr-2"></div>
                                     {/* Circle Icon goes here */}
                                     <span className="text-sm">{group.name}</span>
                                 </li>
