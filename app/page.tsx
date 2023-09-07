@@ -1,10 +1,14 @@
-import { UserButton } from "@clerk/nextjs";
-import {currentUser} from "@clerk/nextjs";
+"use client";
+
 import Link from "next/link";
+import { UserButton } from "@clerk/nextjs";
+import {useUser} from "@clerk/clerk-react";
+import useUserEffect from "@/hooks/useUserEffect";
 
+export default function App() {
+    useUserEffect()
 
-export default async function Home() {
-    const user = await currentUser();
+    const { user} = useUser()
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
