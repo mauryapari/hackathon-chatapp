@@ -76,10 +76,10 @@ Using this mutation function in a React component looks like:
 const mutation = useMutation(api.functions.myMutationFunction);
 function handleButtonPress() {
   // fire and forget, the most common way to use mutations
-  mutation({ first: "Hello!", second: "me" });
+  mutation({ first: "Hello!", second: "client" });
   // OR
   // use the result once the mutation has completed
-  mutation({ first: "Hello!", second: "me" }).then((result) =>
+  mutation({ first: "Hello!", second: "client" }).then((result) =>
     console.log(result)
   );
 }

@@ -8,7 +8,7 @@ import ExportProviders from "@/providers/ExportProviders";
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Hackathon Chat-app',
+  title: 'Hackathon Chat-client',
   description: 'Create, Connect, Message',
 }
 
