@@ -18,7 +18,7 @@ export const create = mutation({
     return await ctx.db.insert("groups", {
       name: args.name,
       description: args.description,
-      icon: args.icon,
+      icon: args.icon ?? "https://cdn.discordapp.com/embed/avatars/0.png",
       owner: user._id,
       admins: [],
       mods: [],
@@ -39,11 +39,48 @@ export const getUserGroups = query({
   handler: async (ctx, args) => {
     const user = await getUser(ctx, { clerk_user_id: args.user_clerk_id });
 
-    if (!user) return null;
+    if (!user) return []
+
+    if(args.limit) {
+        const groups = await ctx.db.query("groups").take(args.limit)
+        return groups.filter((group) => group.users.includes(user._id)) ?? []
+    }
 
     const groups = await ctx.db.query("groups").collect();
+    return groups.filter((group) => group.users.includes(user._id)) ?? []
+  },
+});
 
-    return groups.filter((group) => group.users.includes(user._id));
+// Returns a minimal version of the group to render in the sidebar and reduce load times
+export const getUserGroupsMinimal = query({
+  args: {
+    user_clerk_id: v.string(),
+    limit: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    const user = await getUser(ctx, { clerk_user_id: args.user_clerk_id });
+
+    if (!user) return []
+
+    if(args.limit) {
+      const groups = await ctx.db.query("groups").take(args.limit)
+      return groups.filter((group) => group.users.includes(user._id)).map((g) => {
+        return {
+          _id: g._id,
+          name: g.name,
+          icon: g.icon,
+        }
+      }) ?? []
+    }
+
+    const groups = await ctx.db.query("groups").collect();
+    return groups.filter((group) => group.users.includes(user._id)).map((g) => {
+      return {
+        _id: g._id,
+        name: g.name,
+        icon: g.icon,
+      }
+    }) ?? []
   },
 });
 

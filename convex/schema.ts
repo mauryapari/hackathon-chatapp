@@ -24,7 +24,7 @@ export default defineSchema({
     // The group's description
     description: v.optional(v.string()),
     // The group's icon
-    icon: v.optional(v.string()),
+    icon: v.string(),
     // The group's owner
     owner: v.id("users"),
     // The group's admins

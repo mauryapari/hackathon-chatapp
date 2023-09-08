@@ -23,7 +23,7 @@ const Component: FC<ComponentProps> = async ({}) => {
                 className="bg-red hover:bg-background hover:text-primary border hover:border-red text-white font-semibold py-3 px-6 rounded-full"
               >
                 {" "}
-                Welcome back{" "}
+                Start Chatting{" "}
               </Link>
             ) : (
               <div>
