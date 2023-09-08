@@ -80,7 +80,7 @@ function handleButtonPress() {
   // OR
   // use the result once the mutation has completed
   mutation({ first: "Hello!", second: "client" }).then((result) =>
-    console.log(result)
+    console.log(result),
   );
 }
 ```

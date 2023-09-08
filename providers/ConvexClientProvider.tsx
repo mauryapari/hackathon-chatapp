@@ -8,29 +8,29 @@ import { useAuth } from "@clerk/nextjs";
 const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL!);
 
 function ClerkConvexAdapter() {
-    const { getToken, isSignedIn } = useAuth();
+  const { getToken, isSignedIn } = useAuth();
 
-    useEffect(() => {
-        if (isSignedIn) {
-            convex.setAuth(async () =>
-                getToken({ template: "convex", skipCache: true }),
-            );
-        } else {
-            convex.clearAuth();
-        }
-    }, [getToken, isSignedIn]);
-    return null;
+  useEffect(() => {
+    if (isSignedIn) {
+      convex.setAuth(async () =>
+        getToken({ template: "convex", skipCache: true }),
+      );
+    } else {
+      convex.clearAuth();
+    }
+  }, [getToken, isSignedIn]);
+  return null;
 }
 
 export default function ConvexClientProvider({
-                                                 children,
-                                             }: {
-    children: ReactNode;
+  children,
+}: {
+  children: ReactNode;
 }) {
-    return (
-        <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
-            <ClerkConvexAdapter/>
-            {children}
-        </ConvexProviderWithClerk>
-    );
+  return (
+    <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
+      <ClerkConvexAdapter />
+      {children}
+    </ConvexProviderWithClerk>
+  );
 }

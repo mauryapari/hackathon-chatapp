@@ -5,7 +5,10 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import ExportProviders from "@/providers/ExportProviders";
 
-const montserrat = Montserrat({ subsets: ["latin"], weight: ["400", "500" ,"600", "700"] });
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Hackathon Chat-client",

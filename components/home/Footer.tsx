@@ -1,6 +1,7 @@
 import Link from "next/link";
 
-const hoverLinkStyles = "hover:underline underline-offset-2 hover:text-red-light";
+const hoverLinkStyles =
+  "hover:underline underline-offset-2 hover:text-red-light";
 
 export default function Footer() {
   return (

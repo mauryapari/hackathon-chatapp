@@ -15,7 +15,7 @@ const ThemeToggle: FC<ComponentProps> = ({}) => {
         className="block py-2 pl-3 pr-4 rounded md:p-0"
         onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       >
-        {theme === "dark" ? <FaSun size="24px"/> : <FaRegMoon size="24px"/>}
+        {theme === "dark" ? <FaSun size="24px" /> : <FaRegMoon size="24px" />}
       </button>
     </>
   );
