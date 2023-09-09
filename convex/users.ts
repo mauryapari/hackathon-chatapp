@@ -24,6 +24,7 @@ export const store = mutation({
       clerk_user_id: args.clerk_user_id,
       directChannels: [],
       groups: [],
+      status: "online",
     });
   },
 });
@@ -41,3 +42,19 @@ export const get = query({
       .unique();
   },
 });
+
+export const changeStatus = mutation({
+  args: {
+    clerk_user_id: v.string(),
+    newStatus: v.string()
+  },
+  handler: async ({ db }, args) => {
+    const user = await db.query("users").withIndex("by_clerk_id", (q) => q.eq("clerk_user_id", args.clerk_user_id)).unique();
+
+    if (user === null) {
+      throw new Error("User not found");
+    }
+
+    // await db.patch(user.  _id, {status: args.newStatus});
+  }
+})

@@ -1,13 +1,16 @@
 "use client"
 
-import React, {useEffect, useState} from 'react';
-import { Navbar, Center, Tooltip, UnstyledButton, createStyles, Stack, rem } from '@mantine/core';
+import React, { useEffect, useState } from 'react';
+import { Navbar, Center, Tooltip, UnstyledButton, createStyles, Stack, rem, Badge, Menu } from '@mantine/core';
 import { Avatar } from '@mantine/core';
-import {UserButton, useUser} from "@clerk/clerk-react";
+import { UserButton, useUser } from "@clerk/clerk-react";
 import Link from "next/link";
-import {Id} from "@/convex/_generated/dataModel";
-import {useQuery} from "convex/react";
-import {api} from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { useIdle } from '@mantine/hooks';
+import UserStatusMenu from '../ui/UserStatusMenu';
+import { BsChevronRight, BsFillCircleFill } from 'react-icons/bs';
 
 const useStyles = createStyles((theme) => ({
     link: {
@@ -30,6 +33,14 @@ const useStyles = createStyles((theme) => ({
             color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
         },
     },
+    badge: {
+        position: "absolute",
+        right: "0",
+        bottom: "-3px",
+        border: "5px solid black",
+        borderRadius: "50px",
+        padding: "5px"
+    }
 }));
 
 interface NavbarLinkProps {
@@ -58,7 +69,10 @@ function NavbarLink({ icon, label, active, onClick, href }: NavbarLinkProps) {
 
 export function NavbarMinimal() {
     const [active, setActive] = useState(2);
-    const [groupData, setGroupData] = useState<GroupState>([])
+    const [groupData, setGroupData] = useState<GroupState>([]);
+
+    const idle = useIdle(5000);
+    const { classes, cx } = useStyles();
 
     const authUser = useUser().user
 
@@ -67,7 +81,7 @@ export function NavbarMinimal() {
     })
 
     useEffect(() => {
-        if(!fetchGroups) return
+        if (!fetchGroups) return
 
         const metadata = [
             {
@@ -102,8 +116,45 @@ export function NavbarMinimal() {
 
     return (
         <Navbar width={{ base: 80 }} p="md" className={"min-h-screen"}>
-            <Center>
-                <UserButton afterMultiSessionSingleSignOutUrl={"/"} afterSignOutUrl={"/"} afterSwitchSessionUrl={"/client"}/>
+            <Center className='relative'>
+                <Menu
+                    transitionProps={{ transition: 'slide-left' }}
+                    position="right-start"
+                    width={220}
+                >
+                    <Menu.Target>
+                        <div>
+                            <Avatar src={authUser?.imageUrl} alt="Group Icon" size={32} radius={32} />
+                            <Badge sx={{ backgroundColor: idle ? '#FAB005' : '#82C91E' }} size='md' className={classes.badge}></Badge>
+                        </div>
+                    </Menu.Target>
+                    <Menu.Dropdown>
+                        <Menu.Item
+                            closeMenuOnClick={false}
+                            icon={
+                                <UserButton afterMultiSessionSingleSignOutUrl={"/"} afterSignOutUrl={"/"} afterSwitchSessionUrl={"/client"} />
+                            }>
+                            {authUser?.username}
+                        </Menu.Item>
+                        <Menu.Item
+                            closeMenuOnClick={false}
+                            icon={
+                                <BsFillCircleFill className="text-green-600" />
+                            }
+                            rightSection={<BsChevronRight/>}
+                        >
+                            <UserStatusMenu/>
+                        </Menu.Item>
+                        <Menu.Item
+                        >
+                            Friends
+                        </Menu.Item>
+                        <Menu.Item
+                        >
+                            Blocked Users
+                        </Menu.Item>
+                    </Menu.Dropdown>
+                </Menu>
             </Center>
             <Navbar.Section grow mt={50}>
                 <Stack justify="center" spacing={0}>

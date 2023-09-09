@@ -1,5 +1,5 @@
 import React from "react";
-import {NavbarMinimal} from "@/components/client/SideNavBar";
+import { NavbarMinimal } from "@/components/client/SideNavBar";
 
 export default function RootLayout({
   children,
@@ -7,9 +7,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-        <>
-            {children}
-        <NavbarMinimal />
-        </>
+    <div className="flex">
+      <NavbarMinimal />
+      {children}
+    </div>
   );
 }
