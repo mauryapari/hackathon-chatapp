@@ -14,7 +14,9 @@ const ExportProviders: FC<ExportProvidersProps> = ({ children }) => {
     <ClerkProvider afterSignUpUrl={"/client"} afterSignInUrl={"/client"}>
       <ConvexClientProvider>
         <ThemeProvider>
-          <MantineProviderClient>{children}</MantineProviderClient>
+          <MantineProviderClient>
+              {children}
+          </MantineProviderClient>
         </ThemeProvider>
       </ConvexClientProvider>
     </ClerkProvider>

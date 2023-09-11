@@ -1,10 +1,15 @@
+"use client"
+
 import React, { FC } from "react";
-import { NavbarMinimal } from "@/components/client/SideNavBar";
 import GroupSidebar from "@/components/client/GroupSidebar";
+import useUserEffect from "@/hooks/useUserEffect";
 
 interface ComponentProps {}
 
-const Component: FC<ComponentProps> = async ({}) => {
+const Component: FC<ComponentProps> = ({}) => {
+
+    useUserEffect()
+
   const directMessages = ["James", "Charlie", "John"];
   
   return (
