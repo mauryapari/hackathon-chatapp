@@ -1,7 +1,11 @@
+"use client";
+
 import { Group } from "@/types";
 import GroupHeader from "./GroupHeader";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import DirectMessageHeader from "./DirectMessageHeader";
+import Image from "next/image";
 import {Button, useMantineTheme} from "@mantine/core";
 import {Id} from "@/convex/_generated/dataModel";
 import {useRouter} from "next/navigation";
@@ -46,14 +50,22 @@ export default function GroupSidebar({ group, directMessages, groupChannels }: P
           );
         })}
 
-      {directMessages &&
-        directMessages.map((message, index) => {
-          return (
-            <h1 key={index} className="text-xs my-2 text-center">
-              {message}
-            </h1>
-          );
-        })}
+      {directMessages && (
+        <>
+          <div className="flex flex-row justify-between mx-4 py-2">
+            <p>Direct messages</p>
+            <Image src="/plus.svg" alt="add new icon" width={20} height={20} />
+          </div>
+          {directMessages.map((message, index) => (
+            <div
+              key={index}
+              className="flex flex-row justify-between mr-6 py-1 pl-4 hover:bg-slate-700 mb-1 mx-3 rounded-md"
+            >
+              <h1 className="">{message}</h1>
+            </div>
+          ))}
+        </>
+      )}
     </div>
   );
 }

@@ -8,6 +8,7 @@ import {api} from "@/convex/_generated/api";
 import {Id} from "@/convex/_generated/dataModel";
 import {useUser} from "@clerk/clerk-react";
 import GroupSidebar from "@/components/client/GroupSidebar";
+import ChatInterface from "@/components/client/ChatInterface";
 
 interface ComponentProps {}
 
@@ -40,11 +41,15 @@ const Component: FC<ComponentProps> = ( ) => {
   }
 
   return (
-    <div className="h-full">
+    <div className="h-full w-full flex flex-row">
       <div className="hidden md:flex h-full w-60 z-20 flex-col fixed inset-y-0">
         <GroupSidebar group={group as any} groupChannels={groupChannelData}/>
       </div>
+<<<<<<< HEAD
+      <ChatInterface />
+=======
       <section className="h-full md:pl-60">hello world</section>
+>>>>>>> 9a2a51fbbecdae08dabbac0a9439aa6ccb5bfbb7
     </div>
   )
 };
