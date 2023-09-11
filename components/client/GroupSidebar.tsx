@@ -4,14 +4,11 @@ import { Group } from "@/types";
 import GroupHeader from "./GroupHeader";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
-<<<<<<< HEAD
 import DirectMessageHeader from "./DirectMessageHeader";
 import Image from "next/image";
-=======
 import {Button, useMantineTheme} from "@mantine/core";
 import {Id} from "@/convex/_generated/dataModel";
 import {useRouter} from "next/navigation";
->>>>>>> 9a2a51fbbecdae08dabbac0a9439aa6ccb5bfbb7
 
 interface Props {
   group?: Group;
@@ -53,7 +50,6 @@ export default function GroupSidebar({ group, directMessages, groupChannels }: P
           );
         })}
 
-<<<<<<< HEAD
       {directMessages && (
         <>
           <div className="flex flex-row justify-between mx-4 py-2">
@@ -70,16 +66,6 @@ export default function GroupSidebar({ group, directMessages, groupChannels }: P
           ))}
         </>
       )}
-=======
-      {directMessages &&
-        directMessages.map((message, index) => {
-          return (
-            <h1 key={index} className="text-xs my-2 text-center">
-              {message}
-            </h1>
-          );
-        })}
->>>>>>> 9a2a51fbbecdae08dabbac0a9439aa6ccb5bfbb7
     </div>
   );
 }
