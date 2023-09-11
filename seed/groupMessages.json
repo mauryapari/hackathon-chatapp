@@ -1,0 +1,6 @@
+[{ "user": "user1", "channel": "Channel 1", "content": "Hello, Group 1!" },
+{ "user": "user2", "channel": "Channel 1", "content": "Hi, there!" },
+{ "user": "user3", "channel": "General", "content": "Welcome to Group 2!" },
+{ "user": "user4", "channel": "Development", "content": "Let's discuss the project." },
+{ "user": "user5", "channel": "Private", "content": "This is a private message." }
+]
