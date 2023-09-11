@@ -8,6 +8,7 @@ import {api} from "@/convex/_generated/api";
 import {Id} from "@/convex/_generated/dataModel";
 import {useUser} from "@clerk/clerk-react";
 import GroupSidebar from "@/components/client/GroupSidebar";
+import ChatInterface from "@/components/client/ChatInterface";
 
 interface ComponentProps {}
 
@@ -29,11 +30,11 @@ const Component: FC<ComponentProps> = async ({children}:{children: React.ReactNo
   }
 
   return (
-    <div className="h-full">
+    <div className="h-full w-full flex flex-row">
       <div className="hidden md:flex h-full w-60 z-20 flex-col fixed inset-y-0">
         <GroupSidebar group={group}/>
       </div>
-      <main className="h-full md:pl-60">{children}</main>
+      <ChatInterface />
     </div>
   )
   
