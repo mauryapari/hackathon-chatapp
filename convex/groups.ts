@@ -15,12 +15,12 @@ export const create = mutation({
 
     if (!user) return null;
 
-    return await ctx.db.insert("groups", {
+    const groupID = await ctx.db.insert("groups", {
       name: args.name,
       description: args.description,
       icon: args.icon ?? "https://cdn.discordapp.com/embed/avatars/0.png",
       owner: user._id,
-      admins: [],
+      admins: [user._id],
       mods: [],
       users: [user._id],
       channels: [],
@@ -28,6 +28,8 @@ export const create = mutation({
       inviteUrl: String(Math.random()).slice(2, 8),
       userLimit: 100,
     });
+
+    await ctx.db.patch(user?._id, { groups: [...user.groups, groupID] });
   },
 });
 
@@ -41,9 +43,9 @@ export const getUserGroups = query({
 
     if (!user) return []
 
-    if(args.limit) {
-        const groups = await ctx.db.query("groups").take(args.limit)
-        return groups.filter((group) => group.users.includes(user._id)) ?? []
+    if (args.limit) {
+      const groups = await ctx.db.query("groups").take(args.limit)
+      return groups.filter((group) => group.users.includes(user._id)) ?? []
     }
 
     const groups = await ctx.db.query("groups").collect();
@@ -62,7 +64,7 @@ export const getUserGroupsMinimal = query({
 
     if (!user) return []
 
-    if(args.limit) {
+    if (args.limit) {
       const groups = await ctx.db.query("groups").take(args.limit)
       return groups.filter((group) => group.users.includes(user._id)).map((g) => {
         return {

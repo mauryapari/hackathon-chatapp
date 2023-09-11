@@ -11,6 +11,7 @@ import { api } from "@/convex/_generated/api";
 import { useIdle } from '@mantine/hooks';
 import UserStatusMenu from '../ui/UserStatusMenu';
 import { BsChevronRight, BsFillCircleFill } from 'react-icons/bs';
+import AddGroup from '../ui/AddGroup';
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const useStyles = createStyles((theme) => ({
@@ -59,7 +60,7 @@ function NavbarLink({ icon, label, active, onClick, href }: NavbarLinkProps) {
     const { classes, cx } = useStyles();
     return (
         <Link href={href}>
-            <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
+            <Tooltip label={label} position="right" transitionProps={{ duration: 0 }} withArrow>
                 <UnstyledButton onClick={onClick} className={cx(classes.link, { [classes.active]: active })}>
                     <Avatar src={icon} alt="Group Icon" />
                 </UnstyledButton>
@@ -144,9 +145,9 @@ export function NavbarMinimal() {
                             icon={
                                 <BsFillCircleFill className="text-green-600" />
                             }
-                            rightSection={<BsChevronRight/>}
+                            rightSection={<BsChevronRight />}
                         >
-                            <UserStatusMenu/>
+                            <UserStatusMenu />
                         </Menu.Item>
                         <Menu.Item
                             color = "cyan"
@@ -170,6 +171,9 @@ export function NavbarMinimal() {
             <Navbar.Section grow mt={50}>
                 <Stack justify="center" spacing={0}>
                     {links}
+                    <div className='flex justify-center'>
+                        <AddGroup authUser={authUser} />
+                    </div>
                 </Stack>
             </Navbar.Section>
         </Navbar>
