@@ -11,6 +11,7 @@ import { api } from "@/convex/_generated/api";
 import { useIdle } from '@mantine/hooks';
 import UserStatusMenu from '../ui/UserStatusMenu';
 import { BsChevronRight, BsFillCircleFill } from 'react-icons/bs';
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const useStyles = createStyles((theme) => ({
     link: {
@@ -74,11 +75,13 @@ export function NavbarMinimal() {
     const idle = useIdle(5000);
     const { classes, cx } = useStyles();
 
-    const authUser = useUser().user
+    const authUser = useUser()
 
     const fetchGroups = useQuery(api.groups.getUserGroupsMinimal, {
-        user_clerk_id: authUser ? authUser.id : "skip"
+        user_clerk_id: authUser.isLoaded ? authUser.user?.id as string : "skip"
     })
+
+    console.log(fetchGroups)
 
     useEffect(() => {
         if (!fetchGroups) return
@@ -124,7 +127,7 @@ export function NavbarMinimal() {
                 >
                     <Menu.Target>
                         <div>
-                            <Avatar src={authUser?.imageUrl} alt="Group Icon" size={32} radius={32} />
+                            <Avatar src={authUser.user?.imageUrl} alt="Group Icon" size={32} radius={32} />
                             <Badge sx={{ backgroundColor: idle ? '#FAB005' : '#82C91E' }} size='md' className={classes.badge}></Badge>
                         </div>
                     </Menu.Target>
@@ -134,7 +137,7 @@ export function NavbarMinimal() {
                             icon={
                                 <UserButton afterMultiSessionSingleSignOutUrl={"/"} afterSignOutUrl={"/"} afterSwitchSessionUrl={"/client"} />
                             }>
-                            {authUser?.username}
+                            {authUser.user?.username}
                         </Menu.Item>
                         <Menu.Item
                             closeMenuOnClick={false}
@@ -146,12 +149,20 @@ export function NavbarMinimal() {
                             <UserStatusMenu/>
                         </Menu.Item>
                         <Menu.Item
+                            color = "cyan"
                         >
                             Friends
                         </Menu.Item>
                         <Menu.Item
+                            color = "red"
                         >
                             Blocked Users
+                        </Menu.Item>
+                        <Menu.Divider />
+                        <Menu.Item
+                        >
+
+                            <ThemeToggle />
                         </Menu.Item>
                     </Menu.Dropdown>
                 </Menu>

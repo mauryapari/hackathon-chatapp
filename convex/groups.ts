@@ -73,8 +73,11 @@ export const getUserGroupsMinimal = query({
       }) ?? []
     }
 
-    const groups = await ctx.db.query("groups").collect();
-    return groups.filter((group) => group.users.includes(user._id)).map((g) => {
+    const groups = await ctx.db.query("groups")
+        .filter((q) => q.eq(q.field("users"), [user._id]))
+        .collect();
+
+    return groups.map((g) => {
       return {
         _id: g._id,
         name: g.name,
@@ -92,3 +95,19 @@ export const getGroup = query({
     return await ctx.db.get(args.group_id);
   },
 });
+
+export const getGroupChannels = query({
+    args: {
+        ids: v.array(v.id("groupChannels")),
+    },
+    handler: async (ctx, args) => {
+        const group_channels = []
+
+        for (const id of args.ids) {
+            const channel = await ctx.db.get(id)
+            group_channels.push(channel)
+        }
+
+        return group_channels
+    }
+})

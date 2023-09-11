@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import { useState } from "react";
 import { Group } from "@/types";
@@ -13,16 +14,18 @@ import {
   Badge,
   Menu,
 } from "@mantine/core";
+import { useMantineTheme } from '@mantine/core';
 
 interface Props {
   group: Group;
+  css: string;
 }
 
-export default function GroupHeader({ group }: Props) {
+export default function GroupHeader({ group, css }: Props) {
 
   return (
     <>
-      <div className="text-white flex flex-row items-center justify-between px-6 h-14 border-b border-slate-950">
+      <div className={`flex flex-row items-center justify-between px-6 h-14 border-b border-slate-950 ${css}`}>
         {group.name}
         <Center className="relative">
           <Menu

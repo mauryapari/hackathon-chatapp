@@ -25,6 +25,8 @@ export const store = mutation({
       directChannels: [],
       groups: [],
       status: "online",
+      friends: [],
+      friendRequests: [],
     });
   },
 });
@@ -46,15 +48,22 @@ export const get = query({
 export const changeStatus = mutation({
   args: {
     clerk_user_id: v.string(),
-    newStatus: v.string()
+    newStatus: v.union(
+        v.literal("online"),
+        v.literal("idle"),
+        v.literal("dnd"),
+        v.literal("offline"),
+    )
   },
-  handler: async ({ db }, args) => {
-    const user = await db.query("users").withIndex("by_clerk_id", (q) => q.eq("clerk_user_id", args.clerk_user_id)).unique();
+  handler: async (ctx, args) => {
+    const user = await get(ctx, args);
 
     if (user === null) {
       throw new Error("User not found");
     }
 
-    // await db.patch(user.  _id, {status: args.newStatus});
+    await ctx.db.patch(user._id, {
+      status: args.newStatus
+    });
   }
 })
