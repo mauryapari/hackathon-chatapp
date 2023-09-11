@@ -9,7 +9,7 @@
   "owner": "3nkpkm9mwphqbp6y45vj58wk9jdqrg0",
   "public": false,
   "userLimit": 10,
-  "users": ["3nkpkm9mwphqbp6y45vj58wk9jdqrg0"],
+  "users": ["3nkpkm9mwphqbp6y45vj58wk9jdqrg0", "user_2V3cRx4q2b9qRxmwnHVmDY960jW"]
 },
 {
   "admins": [],
@@ -22,7 +22,7 @@
   "owner": "3nkpkm9mwphqbp6y45vj58wk9jdqrg0",
   "public": false,
   "userLimit": 100,
-  "users": ["3nkpkm9mwphqbp6y45vj58wk9jdqrg0"],
+  "users": ["3nkpkm9mwphqbp6y45vj58wk9jdqrg0"]
 },
 {
     "admins": [],
@@ -35,7 +35,7 @@
     "owner": "3nkpkm9mwphqbp6y45vj58wk9jdqrg0",
     "public": false,
     "userLimit": 100,
-    "users": ["3nkpkm9mwphqbp6y45vj58wk9jdqrg0"],
+    "users": ["3nkpkm9mwphqbp6y45vj58wk9jdqrg0", "user_2V3cRx4q2b9qRxmwnHVmDY960jW"]
 },
 {
   "admins": [],
