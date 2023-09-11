@@ -17,6 +17,8 @@ export default defineSchema({
         v.literal("offline"),
       ),
     ),
+    friends: v.array(v.id("users")),
+    friendRequests: v.array(v.id("users")),
   }).index("by_clerk_id", ["clerk_user_id"]),
   groups: defineTable({
     // The group's name
@@ -43,6 +45,8 @@ export default defineSchema({
     userLimit: v.optional(v.number()),
   }).index("by_invite_url", ["inviteUrl"]),
   groupChannels: defineTable({
+    // The group the channel is in
+    group: v.id("groups"),
     // The group the channel is in
     name: v.string(),
     // The channel's description

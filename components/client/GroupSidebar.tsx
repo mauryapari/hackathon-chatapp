@@ -4,31 +4,56 @@ import { Group } from "@/types";
 import GroupHeader from "./GroupHeader";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
+<<<<<<< HEAD
 import DirectMessageHeader from "./DirectMessageHeader";
 import Image from "next/image";
+=======
+import {Button, useMantineTheme} from "@mantine/core";
+import {Id} from "@/convex/_generated/dataModel";
+import {useRouter} from "next/navigation";
+>>>>>>> 9a2a51fbbecdae08dabbac0a9439aa6ccb5bfbb7
 
 interface Props {
   group?: Group;
+    groupChannels?: {
+      _id: Id<"groupChannels">
+    name: string;
+  }[];
   directMessages?: string[];
 }
 
-export default function GroupSidebar({ group, directMessages }: Props) {
+export default function GroupSidebar({ group, directMessages, groupChannels }: Props) {
+
+    const router = useRouter();
+
+    const theme = useMantineTheme();
+
+    const styles = theme.colorScheme === 'dark' ? "bg-[#2B2D31] light:bg-[#F2F3F5]" : "bg-[#F2F3F5] light:bg-[#2B2D31]"
+
+    const handleChannelClick = (id: Id<"groupChannels">) => {
+        router.push(`/group/${group?._id}/channel/${id}`)
+    }
+
   return (
-    <div className="flex flex-col h-full text-primary w-full bg-[#2B2D31] light:bg-[#F2F3F5]">
-      {group && <GroupHeader group={group} />}
+    <div className={`flex flex-col h-full text-primary w-full ${styles}`}>
+      {group && <GroupHeader group={group} css={styles}/>}
       <h1 className="text-center m-3 bg-gray-600 rounded-sm py-1">
         {group ? "Browse Channels" : "Friends"}
       </h1>
 
-      {group &&
-        group.channels.map((channel, index) => {
+      {group && groupChannels &&
+          groupChannels.map((ch, index) => {
           return (
-            <h1 key={index} className="text-white text-xs my-2 text-center">
-              {channel}
-            </h1>
+            <div key={index} className="my-2 text-center">
+                <Button variant="outline" color="red" radius="xs" onClick={(() => handleChannelClick(ch._id))}>
+                    {ch.name}
+                </Button>
+            </div>
+
           );
         })}
 
+<<<<<<< HEAD
       {directMessages && (
         <>
           <div className="flex flex-row justify-between mx-4 py-2">
@@ -45,6 +70,16 @@ export default function GroupSidebar({ group, directMessages }: Props) {
           ))}
         </>
       )}
+=======
+      {directMessages &&
+        directMessages.map((message, index) => {
+          return (
+            <h1 key={index} className="text-xs my-2 text-center">
+              {message}
+            </h1>
+          );
+        })}
+>>>>>>> 9a2a51fbbecdae08dabbac0a9439aa6ccb5bfbb7
     </div>
   );
 }
