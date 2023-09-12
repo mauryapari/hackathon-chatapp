@@ -4,12 +4,14 @@ import React, { FC } from "react";
 import GroupSidebar from "@/components/client/GroupSidebar";
 import ChatInterface from '../../../components/client/ChatInterface';
 import useUserEffect from "@/hooks/useUserEffect";
+import { useUser } from "@clerk/clerk-react";
 
 interface ComponentProps {}
 
 const Component: FC<ComponentProps> = ({}) => {
 
     useUserEffect()
+    const {user, isLoaded} = useUser();
 
   const directMessages = ["James", "Charlie", "John"];
 

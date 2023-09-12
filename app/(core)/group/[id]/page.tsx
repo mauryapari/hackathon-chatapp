@@ -9,6 +9,7 @@ import {Id} from "@/convex/_generated/dataModel";
 import {useUser} from "@clerk/clerk-react";
 import GroupSidebar from "@/components/client/GroupSidebar";
 import ChatInterface from "@/components/client/ChatInterface";
+import { Skeleton } from "@mantine/core";
 
 interface ComponentProps {}
 
@@ -37,7 +38,7 @@ const Component: FC<ComponentProps> = ( ) => {
     }) : []
 
   if(authUser.isLoaded && !group) {
-    return <div>Group not found</div>
+    return <Skeleton></Skeleton>
   }
 
   return (

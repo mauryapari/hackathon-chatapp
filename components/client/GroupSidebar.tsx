@@ -2,13 +2,11 @@
 
 import { Group } from "@/types";
 import GroupHeader from "./GroupHeader";
-import { useQuery } from "convex/react";
-import { api } from "@/convex/_generated/api";
-import DirectMessageHeader from "./DirectMessageHeader";
-import Image from "next/image";
+
 import {Button, useMantineTheme} from "@mantine/core";
 import {Id} from "@/convex/_generated/dataModel";
 import {useRouter} from "next/navigation";
+import CreateDM from "./CreateDM";
 
 interface Props {
   group?: Group;
@@ -52,9 +50,9 @@ export default function GroupSidebar({ group, directMessages, groupChannels }: P
 
       {directMessages && (
         <>
-          <div className="flex flex-row justify-between mx-4 py-2">
+          <div className="flex flex-row justify-between align-center mx-4 py-2">
             <p>Direct messages</p>
-            <Image src="/plus.svg" alt="add new icon" width={20} height={20} />
+            <CreateDM/>
           </div>
           {directMessages.map((message, index) => (
             <div
