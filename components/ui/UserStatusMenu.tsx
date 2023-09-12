@@ -31,7 +31,7 @@ export default function UserStatusMenu() {
         >
             <Menu.Target>
                 {/* TODO: Add current status based on check*/}
-                <p>Online</p>
+                <p className="text-base">Online</p>
             </Menu.Target>
             <Menu.Dropdown>
                 {userAvailableStatus.map((item, index) => (

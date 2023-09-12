@@ -16,7 +16,7 @@ const Component: FC<ComponentProps> = ({ children }) => {
     <MantineProvider theme={{ colorScheme: theme ?? "dark" as any}}>
       {/*<RouterTransition />*/}
       {children}
-    </MantineProvider>;
+    </MantineProvider>
   </>
 };
 

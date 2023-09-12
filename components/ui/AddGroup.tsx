@@ -14,7 +14,7 @@ import {
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 
-type GroupForm = { name: string; description?: string; icon?: string; public: boolean; }
+type GroupForm = { name: string; description?: string; public: boolean; }
 
 export default function AddGroup({authUser}:any) {
     const [opened, { open, close }] = useDisclosure(false);
@@ -24,10 +24,10 @@ export default function AddGroup({authUser}:any) {
     const handleFormSubmission = (values: GroupForm) => {
         const dataObj = {
             ...values,
-            user_clerk_id: authUser.id
+            icon: `https://cdn.discordapp.com/embed/avatars/${Math.floor(Math.random()*6)+0}.png`,
+            user_clerk_id: authUser.user.id
         }
-        const data = createGroup(dataObj);
-        console.log(dataObj, data);
+        createGroup(dataObj);
         close();
     }
 
@@ -35,7 +35,6 @@ export default function AddGroup({authUser}:any) {
         initialValues: {
           name: '',
           description: '',
-          icon: '',
           public: true,
         },
     

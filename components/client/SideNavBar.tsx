@@ -10,7 +10,7 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useIdle } from '@mantine/hooks';
 import UserStatusMenu from '../ui/UserStatusMenu';
-import { BsChevronRight, BsFillCircleFill } from 'react-icons/bs';
+import { BsChevronRight, BsFillCircleFill, BsFillPersonDashFill, BsPersonFillSlash } from 'react-icons/bs';
 import AddGroup from '../ui/AddGroup';
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
@@ -82,8 +82,6 @@ export function NavbarMinimal() {
         user_clerk_id: authUser.isLoaded ? authUser.user?.id as string : "skip"
     })
 
-    console.log(fetchGroups)
-
     useEffect(() => {
         if (!fetchGroups) return
 
@@ -138,7 +136,7 @@ export function NavbarMinimal() {
                             icon={
                                 <UserButton afterMultiSessionSingleSignOutUrl={"/"} afterSignOutUrl={"/"} afterSwitchSessionUrl={"/client"} />
                             }>
-                            {authUser.user?.username}
+                            <p className='text-base'>{authUser.user?.username}</p>
                         </Menu.Item>
                         <Menu.Item
                             closeMenuOnClick={false}
@@ -150,20 +148,22 @@ export function NavbarMinimal() {
                             <UserStatusMenu />
                         </Menu.Item>
                         <Menu.Item
-                            color = "cyan"
+                            icon={
+                                <BsFillPersonDashFill size={22} />
+                            }
+                            color="cyan"
                         >
-                            Friends
+                            <p className='text-base'>Friends</p>
                         </Menu.Item>
                         <Menu.Item
-                            color = "red"
+                            icon={<BsPersonFillSlash size={22} />}
+                            color="red"
                         >
-                            Blocked Users
+                            <p className='text-base'>Blocked Users</p>
                         </Menu.Item>
                         <Menu.Divider />
                         <Menu.Item
-                        >
-
-                            <ThemeToggle />
+                            icon={<ThemeToggle iconSize="18px" />}>
                         </Menu.Item>
                     </Menu.Dropdown>
                 </Menu>
